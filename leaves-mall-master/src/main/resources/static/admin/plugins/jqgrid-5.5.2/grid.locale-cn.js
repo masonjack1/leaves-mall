@@ -1,6 +1,5 @@
 /**
  * jqGrid Chinese Translation
- * 咖啡兔 yanhonglei@gmail.com 
  * http://www.kafeitu.me 
  * 
  * 花岗岩 marbleqi@163.com

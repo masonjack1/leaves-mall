@@ -1,18 +1,10 @@
-/**
- * 严肃声明：
- * 开源版本请务必保留此注释头信息，若删除我方将保留所有法律责任追究！
- * 本系统已申请软件著作权，受国家版权局知识产权以及国家计算机软件著作权保护！
- * 可正常分享和学习源码，不得用于违法犯罪活动，违者必究！
- * Copyright (c) 2019-2020 十三 all rights reserved.
- * 版权所有，侵权必究！
- */
 package ltd.leaves.mall.controller.mall;
 
 import ltd.leaves.mall.common.Constants;
 import ltd.leaves.mall.common.ServiceResultEnum;
-import ltd.leaves.mall.controller.vo.NewBeeMallUserVO;
+import ltd.leaves.mall.controller.vo.LeavesMallUserVO;
 import ltd.leaves.mall.entity.MallUser;
-import ltd.leaves.mall.service.NewBeeMallUserService;
+import ltd.leaves.mall.service.LeavesMallUserService;
 import ltd.leaves.mall.util.MD5Util;
 import ltd.leaves.mall.util.Result;
 import ltd.leaves.mall.util.ResultGenerator;
@@ -28,7 +20,7 @@ import javax.servlet.http.HttpSession;
 public class PersonalController {
 
     @Resource
-    private NewBeeMallUserService newBeeMallUserService;
+    private LeavesMallUserService leavesMallUserService;
 
     @GetMapping("/personal")
     public String personalPage(HttpServletRequest request,
@@ -77,13 +69,13 @@ public class PersonalController {
         if (StringUtils.isEmpty(kaptchaCode) || !verifyCode.toLowerCase().equals(kaptchaCode)) {
             return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_VERIFY_CODE_ERROR.getResult());
         }
-        //todo 清verifyCode
-        String loginResult = newBeeMallUserService.login(loginName, MD5Util.MD5Encode(password, "UTF-8"), httpSession);
-        //登录成功
+        //todo clear verifyCode
+        String loginResult = leavesMallUserService.login(loginName, MD5Util.MD5Encode(password, "UTF-8"), httpSession);
+        //Login successful
         if (ServiceResultEnum.SUCCESS.getResult().equals(loginResult)) {
             return ResultGenerator.genSuccessResult();
         }
-        //登录失败
+        //Login failed
         return ResultGenerator.genFailResult(loginResult);
     }
 
@@ -107,24 +99,24 @@ public class PersonalController {
             return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_VERIFY_CODE_ERROR.getResult());
         }
         //todo 清verifyCode
-        String registerResult = newBeeMallUserService.register(loginName, password);
-        //注册成功
+        String registerResult = leavesMallUserService.register(loginName, password);
+        //Registered successfully
         if (ServiceResultEnum.SUCCESS.getResult().equals(registerResult)) {
             return ResultGenerator.genSuccessResult();
         }
-        //注册失败
+        //Registration failed
         return ResultGenerator.genFailResult(registerResult);
     }
 
     @PostMapping("/personal/updateInfo")
     @ResponseBody
     public Result updateInfo(@RequestBody MallUser mallUser, HttpSession httpSession) {
-        NewBeeMallUserVO mallUserTemp = newBeeMallUserService.updateUserInfo(mallUser,httpSession);
+        LeavesMallUserVO mallUserTemp = leavesMallUserService.updateUserInfo(mallUser,httpSession);
         if (mallUserTemp == null) {
-            Result result = ResultGenerator.genFailResult("修改失败");
+            Result result = ResultGenerator.genFailResult("Modify the failure");
             return result;
         } else {
-            //返回成功
+            //Return to success
             Result result = ResultGenerator.genSuccessResult();
             return result;
         }

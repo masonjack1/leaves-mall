@@ -1,11 +1,3 @@
-/**
- * 严肃声明：
- * 开源版本请务必保留此注释头信息，若删除我方将保留所有法律责任追究！
- * 本系统已申请软件著作权，受国家版权局知识产权以及国家计算机软件著作权保护！
- * 可正常分享和学习源码，不得用于违法犯罪活动，违者必究！
- * Copyright (c) 2019-2020 十三 all rights reserved.
- * 版权所有，侵权必究！
- */
 package ltd.leaves.mall.service.impl;
 
 import ltd.leaves.mall.dao.AdminUserMapper;
@@ -36,16 +28,16 @@ public class AdminUserServiceImpl implements AdminUserService {
     @Override
     public Boolean updatePassword(Integer loginUserId, String originalPassword, String newPassword) {
         AdminUser adminUser = adminUserMapper.selectByPrimaryKey(loginUserId);
-        //当前用户非空才可以进行更改
+        //The current user is not null to make changes
         if (adminUser != null) {
             String originalPasswordMd5 = MD5Util.MD5Encode(originalPassword, "UTF-8");
             String newPasswordMd5 = MD5Util.MD5Encode(newPassword, "UTF-8");
-            //比较原密码是否正确
+            //Compare the original password to see if it is correct
             if (originalPasswordMd5.equals(adminUser.getLoginPassword())) {
-                //设置新密码并修改
+                //Set a new password and change it
                 adminUser.setLoginPassword(newPasswordMd5);
                 if (adminUserMapper.updateByPrimaryKeySelective(adminUser) > 0) {
-                    //修改成功则返回true
+                    //Returns true on successful modification
                     return true;
                 }
             }
@@ -56,13 +48,13 @@ public class AdminUserServiceImpl implements AdminUserService {
     @Override
     public Boolean updateName(Integer loginUserId, String loginUserName, String nickName) {
         AdminUser adminUser = adminUserMapper.selectByPrimaryKey(loginUserId);
-        //当前用户非空才可以进行更改
+        //The current user is not null to make changes
         if (adminUser != null) {
-            //设置新名称并修改
+            //Set the new name and modify it
             adminUser.setLoginUserName(loginUserName);
             adminUser.setNickName(nickName);
             if (adminUserMapper.updateByPrimaryKeySelective(adminUser) > 0) {
-                //修改成功则返回true
+                //Returns true on successful modification
                 return true;
             }
         }

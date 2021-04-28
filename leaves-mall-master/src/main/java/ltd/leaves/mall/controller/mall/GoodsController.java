@@ -1,21 +1,13 @@
-/**
- * 严肃声明：
- * 开源版本请务必保留此注释头信息，若删除我方将保留所有法律责任追究！
- * 本系统已申请软件著作权，受国家版权局知识产权以及国家计算机软件著作权保护！
- * 可正常分享和学习源码，不得用于违法犯罪活动，违者必究！
- * Copyright (c) 2019-2020 十三 all rights reserved.
- * 版权所有，侵权必究！
- */
 package ltd.leaves.mall.controller.mall;
 
 import ltd.leaves.mall.common.Constants;
-import ltd.leaves.mall.common.NewBeeMallException;
+import ltd.leaves.mall.common.LeavesMallException;
 import ltd.leaves.mall.common.ServiceResultEnum;
-import ltd.leaves.mall.controller.vo.NewBeeMallGoodsDetailVO;
+import ltd.leaves.mall.controller.vo.LeavesMallGoodsDetailVO;
 import ltd.leaves.mall.controller.vo.SearchPageCategoryVO;
-import ltd.leaves.mall.entity.NewBeeMallGoods;
-import ltd.leaves.mall.service.NewBeeMallCategoryService;
-import ltd.leaves.mall.service.NewBeeMallGoodsService;
+import ltd.leaves.mall.entity.LeavesMallGoods;
+import ltd.leaves.mall.service.LeavesMallCategoryService;
+import ltd.leaves.mall.service.LeavesMallGoodsService;
 import ltd.leaves.mall.util.BeanUtil;
 import ltd.leaves.mall.util.PageQueryUtil;
 import org.springframework.stereotype.Controller;
@@ -32,9 +24,9 @@ import java.util.Map;
 public class GoodsController {
 
     @Resource
-    private NewBeeMallGoodsService newBeeMallGoodsService;
+    private LeavesMallGoodsService leavesMallGoodsService;
     @Resource
-    private NewBeeMallCategoryService newBeeMallCategoryService;
+    private LeavesMallCategoryService leavesMallCategoryService;
 
     @GetMapping({"/search", "/search.html"})
     public String searchPage(@RequestParam Map<String, Object> params, HttpServletRequest request) {
@@ -42,31 +34,31 @@ public class GoodsController {
             params.put("page", 1);
         }
         params.put("limit", Constants.GOODS_SEARCH_PAGE_LIMIT);
-        //封装分类数据
+        //Encapsulated classified data
         if (params.containsKey("goodsCategoryId") && !StringUtils.isEmpty(params.get("goodsCategoryId") + "")) {
             Long categoryId = Long.valueOf(params.get("goodsCategoryId") + "");
-            SearchPageCategoryVO searchPageCategoryVO = newBeeMallCategoryService.getCategoriesForSearch(categoryId);
+            SearchPageCategoryVO searchPageCategoryVO = leavesMallCategoryService.getCategoriesForSearch(categoryId);
             if (searchPageCategoryVO != null) {
                 request.setAttribute("goodsCategoryId", categoryId);
                 request.setAttribute("searchPageCategoryVO", searchPageCategoryVO);
             }
         }
-        //封装参数供前端回显
+        //Encapsulate parameters for front-end echo
         if (params.containsKey("orderBy") && !StringUtils.isEmpty(params.get("orderBy") + "")) {
             request.setAttribute("orderBy", params.get("orderBy") + "");
         }
         String keyword = "";
-        //对keyword做过滤 去掉空格
+        //Filter the keyword to remove Spaces
         if (params.containsKey("keyword") && !StringUtils.isEmpty((params.get("keyword") + "").trim())) {
             keyword = params.get("keyword") + "";
         }
         request.setAttribute("keyword", keyword);
         params.put("keyword", keyword);
-        //搜索上架状态下的商品
+        //Search for items that are on the shelves
         params.put("goodsSellStatus", Constants.SELL_STATUS_UP);
-        //封装商品数据
+        //Encapsulated commodity data
         PageQueryUtil pageUtil = new PageQueryUtil(params);
-        request.setAttribute("pageResult", newBeeMallGoodsService.searchNewBeeMallGoods(pageUtil));
+        request.setAttribute("pageResult", leavesMallGoodsService.searchNewBeeMallGoods(pageUtil));
         return "mall/search";
     }
 
@@ -75,14 +67,14 @@ public class GoodsController {
         if (goodsId < 1) {
             return "error/error_5xx";
         }
-        NewBeeMallGoods goods = newBeeMallGoodsService.getNewBeeMallGoodsById(goodsId);
+        LeavesMallGoods goods = leavesMallGoodsService.getNewBeeMallGoodsById(goodsId);
         if (goods == null) {
-            NewBeeMallException.fail(ServiceResultEnum.GOODS_NOT_EXIST.getResult());
+            LeavesMallException.fail(ServiceResultEnum.GOODS_NOT_EXIST.getResult());
         }
         if (Constants.SELL_STATUS_UP != goods.getGoodsSellStatus()) {
-            NewBeeMallException.fail(ServiceResultEnum.GOODS_PUT_DOWN.getResult());
+            LeavesMallException.fail(ServiceResultEnum.GOODS_PUT_DOWN.getResult());
         }
-        NewBeeMallGoodsDetailVO goodsDetailVO = new NewBeeMallGoodsDetailVO();
+        LeavesMallGoodsDetailVO goodsDetailVO = new LeavesMallGoodsDetailVO();
         BeanUtil.copyProperties(goods, goodsDetailVO);
         goodsDetailVO.setGoodsCarouselList(goods.getGoodsCarousel().split(","));
         request.setAttribute("goodsDetail", goodsDetailVO);
