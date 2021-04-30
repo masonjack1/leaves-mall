@@ -40,7 +40,7 @@ public class LeavesMallOrderServiceImpl implements LeavesMallOrderService {
     private LeavesMallGoodsMapper newBeeMallGoodsMapper;
 
     @Override
-    public PageResult getNewBeeMallOrdersPage(PageQueryUtil pageUtil) {
+    public PageResult getNewLeavesOrdersPage(PageQueryUtil pageUtil) {
         List<LeavesMallOrder> leavesMallOrders = leavesMallOrderMapper.findNewBeeMallOrderList(pageUtil);
         int total = leavesMallOrderMapper.getTotalNewBeeMallOrders(pageUtil);
         PageResult pageResult = new PageResult(leavesMallOrders, total, pageUtil.getLimit(), pageUtil.getPage());

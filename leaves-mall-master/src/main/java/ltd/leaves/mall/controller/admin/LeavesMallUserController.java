@@ -35,7 +35,7 @@ public class LeavesMallUserController {
             return ResultGenerator.genFailResult("Parameters of the abnormal！");
         }
         PageQueryUtil pageUtil = new PageQueryUtil(params);
-        return ResultGenerator.genSuccessResult(leavesMallUserService.getNewBeeMallUsersPage(pageUtil));
+        return ResultGenerator.genSuccessResult(leavesMallUserService.getleavesMallUsersPage(pageUtil));
     }
 
     /**

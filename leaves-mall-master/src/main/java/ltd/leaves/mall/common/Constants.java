@@ -19,7 +19,7 @@ public class Constants {
 
     public final static String MALL_VERIFY_CODE_KEY = "mallVerifyCode";//Verification code key
 
-    public final static String MALL_USER_SESSION_KEY = "newBeeMallUser";//Key of user in session
+    public final static String MALL_USER_SESSION_KEY = "leavesMallUser";//Key of user in session
 
     public final static int GOODS_SEARCH_PAGE_LIMIT = 10;//Default number of search pages (10 per page)
 

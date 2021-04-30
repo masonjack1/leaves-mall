@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * NewBee-Mall global exception handling
+ * leaves-mall global exception handling
  */
 @RestControllerAdvice
 public class LeavesMallExceptionHandler {

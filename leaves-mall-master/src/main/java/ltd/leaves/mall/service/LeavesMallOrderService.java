@@ -17,7 +17,7 @@ public interface LeavesMallOrderService {
      * @param pageUtil
      * @return
      */
-    PageResult getNewBeeMallOrdersPage(PageQueryUtil pageUtil);
+    PageResult getNewLeavesOrdersPage(PageQueryUtil pageUtil);
 
     /**
      * Modification of order information

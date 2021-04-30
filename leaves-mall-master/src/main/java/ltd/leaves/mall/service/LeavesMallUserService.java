@@ -14,7 +14,7 @@ public interface LeavesMallUserService {
      * @param pageUtil
      * @return
      */
-    PageResult getNewBeeMallUsersPage(PageQueryUtil pageUtil);
+    PageResult getleavesMallUsersPage(PageQueryUtil pageUtil);
 
     /**
      * User registration
