@@ -116,7 +116,7 @@ public class LeavesMallCategoryServiceImpl implements LeavesMallCategoryService 
                         for (GoodsCategory firstCategory : firstLevelCategories) {
                             LeavesMallIndexCategoryVO leavesMallIndexCategoryVO = new LeavesMallIndexCategoryVO();
                             BeanUtil.copyProperties(firstCategory, leavesMallIndexCategoryVO);
-                            //If the level of classification of data in the newBeeMallIndexCategoryVOS object
+                            //If the level of classification of data in the LeavesMallIndexCategoryVOS object
                             if (secondLevelCategoryVOMap.containsKey(firstCategory.getCategoryId())) {
                                 //Get the second-level category list in the SecondLevelCategoryVomap group based on the ID of the first-level category
                                 List<SecondLevelCategoryVO> tempGoodsCategories = secondLevelCategoryVOMap.get(firstCategory.getCategoryId());

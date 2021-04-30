@@ -5,7 +5,7 @@ import org.springframework.util.StringUtils;
 import java.net.URI;
 
 
-public class NewBeeMallUtils {
+public class LeavesMallUtils {
 
     public static URI getHost(URI uri) {
         URI effectiveURI = null;

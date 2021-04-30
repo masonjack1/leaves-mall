@@ -13,7 +13,7 @@ public interface LeavesMallGoodsService {
      * @param pageUtil
      * @return
      */
-    PageResult getNewBeeMallGoodsPage(PageQueryUtil pageUtil);
+    PageResult getLeavesMallGoodsPage(PageQueryUtil pageUtil);
 
     /**
      * Add the goods
@@ -21,7 +21,7 @@ public interface LeavesMallGoodsService {
      * @param goods
      * @return
      */
-    String saveNewBeeMallGoods(LeavesMallGoods goods);
+    String saveLeavesMallGoods(LeavesMallGoods goods);
 
     /**
      * Add commodity data in batch
@@ -29,7 +29,7 @@ public interface LeavesMallGoodsService {
      * @param leavesMallGoodsList
      * @return
      */
-    void batchSaveNewBeeMallGoods(List<LeavesMallGoods> leavesMallGoodsList);
+    void batchSaveLeavesMallGoods(List<LeavesMallGoods> leavesMallGoodsList);
 
     /**
      * Modify product information
@@ -37,7 +37,7 @@ public interface LeavesMallGoodsService {
      * @param goods
      * @return
      */
-    String updateNewBeeMallGoods(LeavesMallGoods goods);
+    String updateLeavesMallGoods(LeavesMallGoods goods);
 
     /**
      * Get product details
@@ -45,7 +45,7 @@ public interface LeavesMallGoodsService {
      * @param id
      * @return
      */
-    LeavesMallGoods getNewBeeMallGoodsById(Long id);
+    LeavesMallGoods getLeavesMallGoodsById(Long id);
 
     /**
      * Batch modification of sales status (on and off shelves)
@@ -61,5 +61,5 @@ public interface LeavesMallGoodsService {
      * @param pageUtil
      * @return
      */
-    PageResult searchNewBeeMallGoods(PageQueryUtil pageUtil);
+    PageResult searchLeavesMallGoods(PageQueryUtil pageUtil);
 }

@@ -37,12 +37,12 @@ public class LeavesMallOrderServiceImpl implements LeavesMallOrderService {
     @Autowired
     private LeavesMallShoppingCartItemMapper leavesMallShoppingCartItemMapper;
     @Autowired
-    private LeavesMallGoodsMapper newBeeMallGoodsMapper;
+    private LeavesMallGoodsMapper LeavesMallGoodsMapper;
 
     @Override
     public PageResult getNewLeavesOrdersPage(PageQueryUtil pageUtil) {
-        List<LeavesMallOrder> leavesMallOrders = leavesMallOrderMapper.findNewBeeMallOrderList(pageUtil);
-        int total = leavesMallOrderMapper.getTotalNewBeeMallOrders(pageUtil);
+        List<LeavesMallOrder> leavesMallOrders = leavesMallOrderMapper.findLeavesMallOrderList(pageUtil);
+        int total = leavesMallOrderMapper.getTotalLeavesMallOrders(pageUtil);
         PageResult pageResult = new PageResult(leavesMallOrders, total, pageUtil.getLimit(), pageUtil.getPage());
         return pageResult;
     }
@@ -179,24 +179,24 @@ public class LeavesMallOrderServiceImpl implements LeavesMallOrderService {
     public String saveOrder(LeavesMallUserVO user, List<LeavesMallShoppingCartItemVO> myShoppingCartItems) {
         List<Long> itemIdList = myShoppingCartItems.stream().map(LeavesMallShoppingCartItemVO::getCartItemId).collect(Collectors.toList());
         List<Long> goodsIds = myShoppingCartItems.stream().map(LeavesMallShoppingCartItemVO::getGoodsId).collect(Collectors.toList());
-        List<LeavesMallGoods> leavesMallGoods = newBeeMallGoodsMapper.selectByPrimaryKeys(goodsIds);
+        List<LeavesMallGoods> leavesMallGoods = LeavesMallGoodsMapper.selectByPrimaryKeys(goodsIds);
         //Check for items that have been removed from the shelves
         List<LeavesMallGoods> goodsListNotSelling = leavesMallGoods.stream()
-                .filter(newBeeMallGoodsTemp -> newBeeMallGoodsTemp.getGoodsSellStatus() != Constants.SELL_STATUS_UP)
+                .filter(LeavesMallGoodsTemp -> LeavesMallGoodsTemp.getGoodsSellStatus() != Constants.SELL_STATUS_UP)
                 .collect(Collectors.toList());
         if (!CollectionUtils.isEmpty(goodsListNotSelling)) {
             //GoodsListnotselling to people who are not empty means there are items being pulled
             LeavesMallException.fail(goodsListNotSelling.get(0).getGoodsName() + "No longer available. Order cannot be generated");
         }
-        Map<Long, LeavesMallGoods> newBeeMallGoodsMap = leavesMallGoods.stream().collect(Collectors.toMap(LeavesMallGoods::getGoodsId, Function.identity(), (entity1, entity2) -> entity1));
+        Map<Long, LeavesMallGoods> LeavesMallGoodsMap = leavesMallGoods.stream().collect(Collectors.toMap(LeavesMallGoods::getGoodsId, Function.identity(), (entity1, entity2) -> entity1));
         //Determine commodity inventory
         for (LeavesMallShoppingCartItemVO shoppingCartItemVO : myShoppingCartItems) {
             //The associated item data in the shopping cart is not present in the found item, and the error reminder is returned directly
-            if (!newBeeMallGoodsMap.containsKey(shoppingCartItemVO.getGoodsId())) {
+            if (!LeavesMallGoodsMap.containsKey(shoppingCartItemVO.getGoodsId())) {
                 LeavesMallException.fail(ServiceResultEnum.SHOPPING_ITEM_ERROR.getResult());
             }
             //If the quantity is larger than the inventory, the error reminder will be returned directly
-            if (shoppingCartItemVO.getGoodsCount() > newBeeMallGoodsMap.get(shoppingCartItemVO.getGoodsId()).getStockNum()) {
+            if (shoppingCartItemVO.getGoodsCount() > LeavesMallGoodsMap.get(shoppingCartItemVO.getGoodsId()).getStockNum()) {
                 LeavesMallException.fail(ServiceResultEnum.SHOPPING_ITEM_COUNT_ERROR.getResult());
             }
         }
@@ -204,7 +204,7 @@ public class LeavesMallOrderServiceImpl implements LeavesMallOrderService {
         if (!CollectionUtils.isEmpty(itemIdList) && !CollectionUtils.isEmpty(goodsIds) && !CollectionUtils.isEmpty(leavesMallGoods)) {
             if (leavesMallShoppingCartItemMapper.deleteBatch(itemIdList) > 0) {
                 List<StockNumDTO> stockNumDTOS = BeanUtil.copyList(myShoppingCartItems, StockNumDTO.class);
-                int updateStockNumResult = newBeeMallGoodsMapper.updateStockNum(stockNumDTOS);
+                int updateStockNumResult = LeavesMallGoodsMapper.updateStockNum(stockNumDTOS);
                 if (updateStockNumResult < 1) {
                     LeavesMallException.fail(ServiceResultEnum.SHOPPING_ITEM_COUNT_ERROR.getResult());
                 }
@@ -233,9 +233,9 @@ public class LeavesMallOrderServiceImpl implements LeavesMallOrderService {
                     List<LeavesMallOrderItem> leavesMallOrderItems = new ArrayList<>();
                     for (LeavesMallShoppingCartItemVO leavesMallShoppingCartItemVO : myShoppingCartItems) {
                         LeavesMallOrderItem leavesMallOrderItem = new LeavesMallOrderItem();
-                        //Using BeanUtil tools copies of newBeeMallShoppingCartItemVO attribute to newBeeMallOrderItem object
+                        //Using BeanUtil tools copies of LeavesMallShoppingCartItemVO attribute to LeavesMallOrderItem object
                         BeanUtil.copyProperties(leavesMallShoppingCartItemVO, leavesMallOrderItem);
-                        //The newBeeMallOrderMapper file uses UseGeneratedKeys in the insert() method so the orderID can be retrieved
+                        //The LeavesMallOrderMapper file uses UseGeneratedKeys in the insert() method so the orderID can be retrieved
                         leavesMallOrderItem.setOrderId(leavesMallOrder.getOrderId());
                         leavesMallOrderItems.add(leavesMallOrderItem);
                     }
@@ -265,9 +265,9 @@ public class LeavesMallOrderServiceImpl implements LeavesMallOrderService {
                 List<LeavesMallOrderItemVO> leavesMallOrderItemVOS = BeanUtil.copyList(orderItems, LeavesMallOrderItemVO.class);
                 LeavesMallOrderDetailVO leavesMallOrderDetailVO = new LeavesMallOrderDetailVO();
                 BeanUtil.copyProperties(leavesMallOrder, leavesMallOrderDetailVO);
-                leavesMallOrderDetailVO.setOrderStatusString(LeavesMallOrderStatusEnum.getNewBeeMallOrderStatusEnumByStatus(leavesMallOrderDetailVO.getOrderStatus()).getName());
+                leavesMallOrderDetailVO.setOrderStatusString(LeavesMallOrderStatusEnum.getLeavesMallOrderStatusEnumByStatus(leavesMallOrderDetailVO.getOrderStatus()).getName());
                 leavesMallOrderDetailVO.setPayTypeString(PayTypeEnum.getPayTypeEnumByType(leavesMallOrderDetailVO.getPayType()).getName());
-                leavesMallOrderDetailVO.setNewBeeMallOrderItemVOS(leavesMallOrderItemVOS);
+                leavesMallOrderDetailVO.setLeavesMallOrderItemVOS(leavesMallOrderItemVOS);
                 return leavesMallOrderDetailVO;
             }
         }
@@ -275,21 +275,21 @@ public class LeavesMallOrderServiceImpl implements LeavesMallOrderService {
     }
 
     @Override
-    public LeavesMallOrder getNewBeeMallOrderByOrderNo(String orderNo) {
+    public LeavesMallOrder getLeavesMallOrderByOrderNo(String orderNo) {
         return leavesMallOrderMapper.selectByOrderNo(orderNo);
     }
 
     @Override
     public PageResult getMyOrders(PageQueryUtil pageUtil) {
-        int total = leavesMallOrderMapper.getTotalNewBeeMallOrders(pageUtil);
-        List<LeavesMallOrder> leavesMallOrders = leavesMallOrderMapper.findNewBeeMallOrderList(pageUtil);
+        int total = leavesMallOrderMapper.getTotalLeavesMallOrders(pageUtil);
+        List<LeavesMallOrder> leavesMallOrders = leavesMallOrderMapper.findLeavesMallOrderList(pageUtil);
         List<LeavesMallOrderListVO> orderListVOS = new ArrayList<>();
         if (total > 0) {
             //Data transformation converts entity classes to VO
             orderListVOS = BeanUtil.copyList(leavesMallOrders, LeavesMallOrderListVO.class);
             //Set the order status display value in Chinese
             for (LeavesMallOrderListVO leavesMallOrderListVO : orderListVOS) {
-                leavesMallOrderListVO.setOrderStatusString(LeavesMallOrderStatusEnum.getNewBeeMallOrderStatusEnumByStatus(leavesMallOrderListVO.getOrderStatus()).getName());
+                leavesMallOrderListVO.setOrderStatusString(LeavesMallOrderStatusEnum.getLeavesMallOrderStatusEnumByStatus(leavesMallOrderListVO.getOrderStatus()).getName());
             }
             List<Long> orderIds = leavesMallOrders.stream().map(LeavesMallOrder::getOrderId).collect(Collectors.toList());
             if (!CollectionUtils.isEmpty(orderIds)) {
@@ -299,9 +299,9 @@ public class LeavesMallOrderServiceImpl implements LeavesMallOrderService {
                     //Encapsulates order item data for each order list object
                     if (itemByOrderIdMap.containsKey(leavesMallOrderListVO.getOrderId())) {
                         List<LeavesMallOrderItem> orderItemListTemp = itemByOrderIdMap.get(leavesMallOrderListVO.getOrderId());
-                        //Converts the list of NewBeeAllOrderItem objects to the list of NewBeeAllOrderItemVo objects
+                        //Converts the list of LeavesAllOrderItem objects to the list of LeavesAllOrderItemVo objects
                         List<LeavesMallOrderItemVO> leavesMallOrderItemVOS = BeanUtil.copyList(orderItemListTemp, LeavesMallOrderItemVO.class);
-                        leavesMallOrderListVO.setNewBeeMallOrderItemVOS(leavesMallOrderItemVOS);
+                        leavesMallOrderListVO.setLeavesMallOrderItemVOS(leavesMallOrderItemVOS);
                     }
                 }
             }

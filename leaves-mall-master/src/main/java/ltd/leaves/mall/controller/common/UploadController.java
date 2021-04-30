@@ -1,7 +1,7 @@
 package ltd.leaves.mall.controller.common;
 
 import ltd.leaves.mall.common.Constants;
-import ltd.leaves.mall.util.NewBeeMallUtils;
+import ltd.leaves.mall.util.LeavesMallUtils;
 import ltd.leaves.mall.util.Result;
 import ltd.leaves.mall.util.ResultGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +52,7 @@ public class UploadController {
             }
             file.transferTo(destFile);
             Result resultSuccess = ResultGenerator.genSuccessResult();
-            resultSuccess.setData(NewBeeMallUtils.getHost(new URI(httpServletRequest.getRequestURL() + "")) + "/upload/" + newFileName);
+            resultSuccess.setData(LeavesMallUtils.getHost(new URI(httpServletRequest.getRequestURL() + "")) + "/upload/" + newFileName);
             return resultSuccess;
         } catch (IOException e) {
             e.printStackTrace();
@@ -103,7 +103,7 @@ public class UploadController {
                     }
                 }
                 multipartFiles.get(i).transferTo(destFile);
-                fileNames.add(NewBeeMallUtils.getHost(new URI(httpServletRequest.getRequestURL() + "")) + "/upload/" + newFileName);
+                fileNames.add(LeavesMallUtils.getHost(new URI(httpServletRequest.getRequestURL() + "")) + "/upload/" + newFileName);
             } catch (IOException e) {
                 e.printStackTrace();
                 return ResultGenerator.genFailResult("File upload failed");

@@ -33,8 +33,8 @@ public class LeavesMallGoodsController {
 
     @GetMapping("/goods")
     public String goodsPage(HttpServletRequest request) {
-        request.setAttribute("path", "newbee_mall_goods");
-        return "admin/newbee_mall_goods";
+        request.setAttribute("path", "leaves_mall_goods");
+        return "admin/leaves_mall_goods";
     }
 
     @GetMapping("/goods/edit")
@@ -52,7 +52,7 @@ public class LeavesMallGoodsController {
                 request.setAttribute("secondLevelCategories", secondLevelCategories);
                 request.setAttribute("thirdLevelCategories", thirdLevelCategories);
                 request.setAttribute("path", "goods-edit");
-                return "admin/newbee_mall_goods_edit";
+                return "admin/leaves_mall_goods_edit";
             }
         }
         return "error/error_5xx";
@@ -61,7 +61,7 @@ public class LeavesMallGoodsController {
     @GetMapping("/goods/edit/{goodsId}")
     public String edit(HttpServletRequest request, @PathVariable("goodsId") Long goodsId) {
         request.setAttribute("path", "edit");
-        LeavesMallGoods leavesMallGoods = leavesMallGoodsService.getNewBeeMallGoodsById(goodsId);
+        LeavesMallGoods leavesMallGoods = leavesMallGoodsService.getLeavesMallGoodsById(goodsId);
         if (leavesMallGoods == null) {
             return "error/error_400";
         }
@@ -112,7 +112,7 @@ public class LeavesMallGoodsController {
         }
         request.setAttribute("goods", leavesMallGoods);
         request.setAttribute("path", "goods-edit");
-        return "admin/newbee_mall_goods_edit";
+        return "admin/leaves_mall_goods_edit";
     }
 
     /**
@@ -125,7 +125,7 @@ public class LeavesMallGoodsController {
             return ResultGenerator.genFailResult("Parameters of the abnormal！");
         }
         PageQueryUtil pageUtil = new PageQueryUtil(params);
-        return ResultGenerator.genSuccessResult(leavesMallGoodsService.getNewBeeMallGoodsPage(pageUtil));
+        return ResultGenerator.genSuccessResult(leavesMallGoodsService.getLeavesMallGoodsPage(pageUtil));
     }
 
     /**
@@ -146,7 +146,7 @@ public class LeavesMallGoodsController {
                 || StringUtils.isEmpty(leavesMallGoods.getGoodsDetailContent())) {
             return ResultGenerator.genFailResult("Parameters of the abnormal！");
         }
-        String result = leavesMallGoodsService.saveNewBeeMallGoods(leavesMallGoods);
+        String result = leavesMallGoodsService.saveLeavesMallGoods(leavesMallGoods);
         if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
             return ResultGenerator.genSuccessResult();
         } else {
@@ -174,7 +174,7 @@ public class LeavesMallGoodsController {
                 || StringUtils.isEmpty(leavesMallGoods.getGoodsDetailContent())) {
             return ResultGenerator.genFailResult("Parameters of the abnormal！");
         }
-        String result = leavesMallGoodsService.updateNewBeeMallGoods(leavesMallGoods);
+        String result = leavesMallGoodsService.updateLeavesMallGoods(leavesMallGoods);
         if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
             return ResultGenerator.genSuccessResult();
         } else {
@@ -188,7 +188,7 @@ public class LeavesMallGoodsController {
     @GetMapping("/goods/info/{id}")
     @ResponseBody
     public Result info(@PathVariable("id") Long id) {
-        LeavesMallGoods goods = leavesMallGoodsService.getNewBeeMallGoodsById(id);
+        LeavesMallGoods goods = leavesMallGoodsService.getLeavesMallGoodsById(id);
         if (goods == null) {
             return ResultGenerator.genFailResult(ServiceResultEnum.DATA_NOT_EXIST.getResult());
         }

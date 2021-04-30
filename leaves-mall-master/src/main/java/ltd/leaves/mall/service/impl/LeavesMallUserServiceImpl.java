@@ -71,13 +71,13 @@ public class LeavesMallUserServiceImpl implements LeavesMallUserService {
         MallUser userFromDB = mallUserMapper.selectByPrimaryKey(userTemp.getUserId());
         if (userFromDB != null) {
             if (!StringUtils.isEmpty(mallUser.getNickName())) {
-                userFromDB.setNickName(NewBeeMallUtils.cleanString(mallUser.getNickName()));
+                userFromDB.setNickName(LeavesMallUtils.cleanString(mallUser.getNickName()));
             }
             if (!StringUtils.isEmpty(mallUser.getAddress())) {
-                userFromDB.setAddress(NewBeeMallUtils.cleanString(mallUser.getAddress()));
+                userFromDB.setAddress(LeavesMallUtils.cleanString(mallUser.getAddress()));
             }
             if (!StringUtils.isEmpty(mallUser.getIntroduceSign())) {
-                userFromDB.setIntroduceSign(NewBeeMallUtils.cleanString(mallUser.getIntroduceSign()));
+                userFromDB.setIntroduceSign(LeavesMallUtils.cleanString(mallUser.getIntroduceSign()));
             }
             if (mallUserMapper.updateByPrimaryKeySelective(userFromDB) > 0) {
                 LeavesMallUserVO leavesMallUserVO = new LeavesMallUserVO();

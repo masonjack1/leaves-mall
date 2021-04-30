@@ -61,7 +61,7 @@
             #{id}
         </foreach>
     </update>
-    <select id="findNewBeeMallGoodsList" parameterType="Map" resultMap="BaseResultMap">
+    <select id="findLeavesMallGoodsList" parameterType="Map" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from tb_leaves_mall_goods_info
@@ -85,7 +85,7 @@
         </if>
     </select>
 
-    <select id="findNewBeeMallGoodsListBySearch" parameterType="Map" resultMap="BaseResultMap">
+    <select id="findLeavesMallGoodsListBySearch" parameterType="Map" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from tb_leaves_mall_goods_info
@@ -121,7 +121,7 @@
         </if>
     </select>
 
-    <select id="getTotalNewBeeMallGoodsBySearch" parameterType="Map" resultType="int">
+    <select id="getTotalLeavesMallGoodsBySearch" parameterType="Map" resultType="int">
         select count(*) from tb_leaves_mall_goods_info
         <where>
             <if test="keyword!=null and keyword!=''">
@@ -150,7 +150,7 @@
         </foreach>
         );
     </select>
-    <select id="getTotalNewBeeMallGoods" parameterType="Map" resultType="int">
+    <select id="getTotalLeavesMallGoods" parameterType="Map" resultType="int">
         select count(*) from tb_leaves_mall_goods_info
         <where>
             <if test="goodsName!=null and goodsName!=''">

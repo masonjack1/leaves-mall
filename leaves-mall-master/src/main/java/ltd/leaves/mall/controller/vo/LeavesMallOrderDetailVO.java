@@ -121,11 +121,11 @@ public class LeavesMallOrderDetailVO implements Serializable {
         this.orderStatusString = orderStatusString;
     }
 
-    public List<LeavesMallOrderItemVO> getNewBeeMallOrderItemVOS() {
+    public List<LeavesMallOrderItemVO> getLeavesMallOrderItemVOS() {
         return leavesMallOrderItemVOS;
     }
 
-    public void setNewBeeMallOrderItemVOS(List<LeavesMallOrderItemVO> leavesMallOrderItemVOS) {
+    public void setLeavesMallOrderItemVOS(List<LeavesMallOrderItemVO> leavesMallOrderItemVOS) {
         this.leavesMallOrderItemVOS = leavesMallOrderItemVOS;
     }
 }

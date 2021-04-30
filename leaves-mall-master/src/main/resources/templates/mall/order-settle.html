@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="mall/header::head-fragment('NewBee商城-订单结算','order-detail')">
+<head th:replace="mall/header::head-fragment('leaves mall-订单结算','order-detail')">
 </head>
 <link th:href="@{/mall/css/bootstrap-modal.css}" rel="stylesheet">
 <body>
@@ -72,7 +72,7 @@
                                             <td class="col col-name">
                                                 <p class="name">
                                                     <a target="_blank" th:href="@{'/goods/detail/'+${item.goodsId}}"
-                                                       th:text="${item.goodsName}">newbee</a>
+                                                       th:text="${item.goodsName}">leaves</a>
                                                 </p>
                                             </td>
                                             <td class="col col-price"><p class="price"
@@ -93,7 +93,7 @@
                                         <th>收货地址：</th>
                                         <td class="user_address_label"
                                             th:text="${session.leavesMallUser.address==''?'无':session.leavesMallUser.address}">
-                                            newbee
+                                            leaves
                                         </td>
                                     </tr>
                                     </tbody>

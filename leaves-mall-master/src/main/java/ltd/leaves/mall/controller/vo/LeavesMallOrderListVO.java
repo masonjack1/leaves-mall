@@ -91,11 +91,11 @@ public class LeavesMallOrderListVO implements Serializable {
         this.createTime = createTime;
     }
 
-    public List<LeavesMallOrderItemVO> getNewBeeMallOrderItemVOS() {
+    public List<LeavesMallOrderItemVO> getLeavesMallOrderItemVOS() {
         return leavesMallOrderItemVOS;
     }
 
-    public void setNewBeeMallOrderItemVOS(List<LeavesMallOrderItemVO> leavesMallOrderItemVOS) {
+    public void setLeavesMallOrderItemVOS(List<LeavesMallOrderItemVO> leavesMallOrderItemVOS) {
         this.leavesMallOrderItemVOS = leavesMallOrderItemVOS;
     }
 }

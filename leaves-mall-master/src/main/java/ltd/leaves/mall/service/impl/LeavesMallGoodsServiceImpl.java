@@ -23,15 +23,15 @@ public class LeavesMallGoodsServiceImpl implements LeavesMallGoodsService {
     private LeavesMallGoodsMapper goodsMapper;
 
     @Override
-    public PageResult getNewBeeMallGoodsPage(PageQueryUtil pageUtil) {
-        List<LeavesMallGoods> goodsList = goodsMapper.findNewBeeMallGoodsList(pageUtil);
-        int total = goodsMapper.getTotalNewBeeMallGoods(pageUtil);
+    public PageResult getLeavesMallGoodsPage(PageQueryUtil pageUtil) {
+        List<LeavesMallGoods> goodsList = goodsMapper.findLeavesMallGoodsList(pageUtil);
+        int total = goodsMapper.getTotalLeavesMallGoods(pageUtil);
         PageResult pageResult = new PageResult(goodsList, total, pageUtil.getLimit(), pageUtil.getPage());
         return pageResult;
     }
 
     @Override
-    public String saveNewBeeMallGoods(LeavesMallGoods goods) {
+    public String saveLeavesMallGoods(LeavesMallGoods goods) {
         if (goodsMapper.insertSelective(goods) > 0) {
             return ServiceResultEnum.SUCCESS.getResult();
         }
@@ -39,14 +39,14 @@ public class LeavesMallGoodsServiceImpl implements LeavesMallGoodsService {
     }
 
     @Override
-    public void batchSaveNewBeeMallGoods(List<LeavesMallGoods> leavesMallGoodsList) {
+    public void batchSaveLeavesMallGoods(List<LeavesMallGoods> leavesMallGoodsList) {
         if (!CollectionUtils.isEmpty(leavesMallGoodsList)) {
             goodsMapper.batchInsert(leavesMallGoodsList);
         }
     }
 
     @Override
-    public String updateNewBeeMallGoods(LeavesMallGoods goods) {
+    public String updateLeavesMallGoods(LeavesMallGoods goods) {
         LeavesMallGoods temp = goodsMapper.selectByPrimaryKey(goods.getGoodsId());
         if (temp == null) {
             return ServiceResultEnum.DATA_NOT_EXIST.getResult();
@@ -59,7 +59,7 @@ public class LeavesMallGoodsServiceImpl implements LeavesMallGoodsService {
     }
 
     @Override
-    public LeavesMallGoods getNewBeeMallGoodsById(Long id) {
+    public LeavesMallGoods getLeavesMallGoodsById(Long id) {
         return goodsMapper.selectByPrimaryKey(id);
     }
     
@@ -69,9 +69,9 @@ public class LeavesMallGoodsServiceImpl implements LeavesMallGoodsService {
     }
 
     @Override
-    public PageResult searchNewBeeMallGoods(PageQueryUtil pageUtil) {
-        List<LeavesMallGoods> goodsList = goodsMapper.findNewBeeMallGoodsListBySearch(pageUtil);
-        int total = goodsMapper.getTotalNewBeeMallGoodsBySearch(pageUtil);
+    public PageResult searchLeavesMallGoods(PageQueryUtil pageUtil) {
+        List<LeavesMallGoods> goodsList = goodsMapper.findLeavesMallGoodsListBySearch(pageUtil);
+        int total = goodsMapper.getTotalLeavesMallGoodsBySearch(pageUtil);
         List<LeavesMallSearchGoodsVO> leavesMallSearchGoodsVOS = new ArrayList<>();
         if (!CollectionUtils.isEmpty(goodsList)) {
             leavesMallSearchGoodsVOS = BeanUtil.copyList(goodsList, LeavesMallSearchGoodsVO.class);

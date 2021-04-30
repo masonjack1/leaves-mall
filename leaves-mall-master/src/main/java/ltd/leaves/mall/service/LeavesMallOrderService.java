@@ -75,7 +75,7 @@ public interface LeavesMallOrderService {
      * @param orderNo
      * @return
      */
-    LeavesMallOrder getNewBeeMallOrderByOrderNo(String orderNo);
+    LeavesMallOrder getLeavesMallOrderByOrderNo(String orderNo);
 
     /**
      * My order list

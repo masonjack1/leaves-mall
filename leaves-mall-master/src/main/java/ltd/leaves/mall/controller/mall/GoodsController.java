@@ -58,7 +58,7 @@ public class GoodsController {
         params.put("goodsSellStatus", Constants.SELL_STATUS_UP);
         //Encapsulated commodity data
         PageQueryUtil pageUtil = new PageQueryUtil(params);
-        request.setAttribute("pageResult", leavesMallGoodsService.searchNewBeeMallGoods(pageUtil));
+        request.setAttribute("pageResult", leavesMallGoodsService.searchLeavesMallGoods(pageUtil));
         return "mall/search";
     }
 
@@ -67,7 +67,7 @@ public class GoodsController {
         if (goodsId < 1) {
             return "error/error_5xx";
         }
-        LeavesMallGoods goods = leavesMallGoodsService.getNewBeeMallGoodsById(goodsId);
+        LeavesMallGoods goods = leavesMallGoodsService.getLeavesMallGoodsById(goodsId);
         if (goods == null) {
             LeavesMallException.fail(ServiceResultEnum.GOODS_NOT_EXIST.getResult());
         }

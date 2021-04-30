@@ -52,7 +52,7 @@ public class ShoppingCartController {
 
     @PostMapping("/shop-cart")
     @ResponseBody
-    public Result saveNewBeeMallShoppingCartItem(@RequestBody LeavesMallShoppingCartItem leavesMallShoppingCartItem,
+    public Result saveLeavesMallShoppingCartItem(@RequestBody LeavesMallShoppingCartItem leavesMallShoppingCartItem,
                                                  HttpSession httpSession) {
         LeavesMallUserVO user = (LeavesMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
         leavesMallShoppingCartItem.setUserId(user.getUserId());
@@ -68,7 +68,7 @@ public class ShoppingCartController {
 
     @PutMapping("/shop-cart")
     @ResponseBody
-    public Result updateNewBeeMallShoppingCartItem(@RequestBody LeavesMallShoppingCartItem leavesMallShoppingCartItem,
+    public Result updateLeavesMallShoppingCartItem(@RequestBody LeavesMallShoppingCartItem leavesMallShoppingCartItem,
                                                    HttpSession httpSession) {
         LeavesMallUserVO user = (LeavesMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
         leavesMallShoppingCartItem.setUserId(user.getUserId());
@@ -82,12 +82,12 @@ public class ShoppingCartController {
         return ResultGenerator.genFailResult(updateResult);
     }
 
-    @DeleteMapping("/shop-cart/{newBeeMallShoppingCartItemId}")
+    @DeleteMapping("/shop-cart/{LeavesMallShoppingCartItemId}")
     @ResponseBody
-    public Result updateNewBeeMallShoppingCartItem(@PathVariable("newBeeMallShoppingCartItemId") Long newBeeMallShoppingCartItemId,
+    public Result updateLeavesMallShoppingCartItem(@PathVariable("LeavesMallShoppingCartItemId") Long LeavesMallShoppingCartItemId,
                                                    HttpSession httpSession) {
         LeavesMallUserVO user = (LeavesMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
-        Boolean deleteResult = leavesMallShoppingCartService.deleteById(newBeeMallShoppingCartItemId);
+        Boolean deleteResult = leavesMallShoppingCartService.deleteById(LeavesMallShoppingCartItemId);
         //delete successful
         if (deleteResult) {
             return ResultGenerator.genSuccessResult();

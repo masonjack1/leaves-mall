@@ -23,9 +23,9 @@ public interface LeavesMallOrderMapper {
 
     int updateByPrimaryKey(LeavesMallOrder record);
 
-    List<LeavesMallOrder> findNewBeeMallOrderList(PageQueryUtil pageUtil);
+    List<LeavesMallOrder> findLeavesMallOrderList(PageQueryUtil pageUtil);
 
-    int getTotalNewBeeMallOrders(PageQueryUtil pageUtil);
+    int getTotalLeavesMallOrders(PageQueryUtil pageUtil);
 
     List<LeavesMallOrder> selectByPrimaryKeys(@Param("orderIds") List<Long> orderIds);
 

@@ -16,7 +16,7 @@ public enum LeavesMallCategoryLevelEnum {
         this.name = name;
     }
 
-    public static LeavesMallCategoryLevelEnum getNewBeeMallOrderStatusEnumByLevel(int level) {
+    public static LeavesMallCategoryLevelEnum getLeavesMallOrderStatusEnumByLevel(int level) {
         for (LeavesMallCategoryLevelEnum leavesMallCategoryLevelEnum : LeavesMallCategoryLevelEnum.values()) {
             if (leavesMallCategoryLevelEnum.getLevel() == level) {
                 return leavesMallCategoryLevelEnum;

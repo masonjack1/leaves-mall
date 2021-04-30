@@ -409,13 +409,13 @@ a {
     line-height: 28px;
 }
 
-.newbee-pagenavi {
+.leaves-pagenavi {
     height: 30px;
     padding: 15px 0;
     text-align: center;
 }
 
-.newbee-pagenavi .numbers {
+.leaves-pagenavi .numbers {
     display: inline-block;
     *zoom: 1;
     *display: inline;
@@ -429,22 +429,22 @@ a {
     color: #b0b0b0;
 }
 
-.newbee-pagenavi .iconfont {
+.leaves-pagenavi .iconfont {
     font-size: 24px;
     vertical-align: bottom;
 }
 
-.newbee-pagenavi .current {
+.leaves-pagenavi .current {
     background-color: #757575;
     color: #fff;
 }
 
-.newbee-pagenavi a.numbers {
+.leaves-pagenavi a.numbers {
     -webkit-transition: all .2s linear;
     transition: all .2s linear
 }
 
-.newbee-pagenavi a.numbers:hover {
+.leaves-pagenavi a.numbers:hover {
     background: #b0b0b0;
     color: #fff
 }

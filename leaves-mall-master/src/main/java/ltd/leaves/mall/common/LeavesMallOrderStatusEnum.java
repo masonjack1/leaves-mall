@@ -21,7 +21,7 @@ public enum LeavesMallOrderStatusEnum {
         this.name = name;
     }
 
-    public static LeavesMallOrderStatusEnum getNewBeeMallOrderStatusEnumByStatus(int orderStatus) {
+    public static LeavesMallOrderStatusEnum getLeavesMallOrderStatusEnumByStatus(int orderStatus) {
         for (LeavesMallOrderStatusEnum leavesMallOrderStatusEnum : LeavesMallOrderStatusEnum.values()) {
             if (leavesMallOrderStatusEnum.getOrderStatus() == orderStatus) {
                 return leavesMallOrderStatusEnum;

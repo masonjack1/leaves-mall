@@ -102,7 +102,7 @@ public class OrderController {
     @GetMapping("/selectPayType")
     public String selectPayType(HttpServletRequest request, @RequestParam("orderNo") String orderNo, HttpSession httpSession) {
         LeavesMallUserVO user = (LeavesMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
-        LeavesMallOrder leavesMallOrder = leavesMallOrderService.getNewBeeMallOrderByOrderNo(orderNo);
+        LeavesMallOrder leavesMallOrder = leavesMallOrderService.getLeavesMallOrderByOrderNo(orderNo);
         //todo 判断订单userId
         //todo 判断订单状态
         request.setAttribute("orderNo", orderNo);
@@ -113,7 +113,7 @@ public class OrderController {
     @GetMapping("/payPage")
     public String payOrder(HttpServletRequest request, @RequestParam("orderNo") String orderNo, HttpSession httpSession, @RequestParam("payType") int payType) {
         LeavesMallUserVO user = (LeavesMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
-        LeavesMallOrder leavesMallOrder = leavesMallOrderService.getNewBeeMallOrderByOrderNo(orderNo);
+        LeavesMallOrder leavesMallOrder = leavesMallOrderService.getLeavesMallOrderByOrderNo(orderNo);
         //todo 判断订单userId
         //todo 判断订单状态
         request.setAttribute("orderNo", orderNo);

@@ -24,15 +24,15 @@ public interface LeavesMallGoodsMapper {
 
     int updateByPrimaryKey(LeavesMallGoods record);
 
-    List<LeavesMallGoods> findNewBeeMallGoodsList(PageQueryUtil pageUtil);
+    List<LeavesMallGoods> findLeavesMallGoodsList(PageQueryUtil pageUtil);
 
-    int getTotalNewBeeMallGoods(PageQueryUtil pageUtil);
+    int getTotalLeavesMallGoods(PageQueryUtil pageUtil);
 
     List<LeavesMallGoods> selectByPrimaryKeys(List<Long> goodsIds);
 
-    List<LeavesMallGoods> findNewBeeMallGoodsListBySearch(PageQueryUtil pageUtil);
+    List<LeavesMallGoods> findLeavesMallGoodsListBySearch(PageQueryUtil pageUtil);
 
-    int getTotalNewBeeMallGoodsBySearch(PageQueryUtil pageUtil);
+    int getTotalLeavesMallGoodsBySearch(PageQueryUtil pageUtil);
 
     int batchInsert(@Param("leavesMallGoodsList") List<LeavesMallGoods> leavesMallGoodsList);
 
