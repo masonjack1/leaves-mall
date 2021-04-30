@@ -13,7 +13,7 @@ public interface LeavesMallShoppingCartService {
      * @param leavesMallShoppingCartItem
      * @return
      */
-    String saveNewBeeMallCartItem(LeavesMallShoppingCartItem leavesMallShoppingCartItem);
+    String saveLeavesMallCartItem(LeavesMallShoppingCartItem leavesMallShoppingCartItem);
 
     /**
      * Modify the properties in the shopping cart
@@ -21,29 +21,29 @@ public interface LeavesMallShoppingCartService {
      * @param leavesMallShoppingCartItem
      * @return
      */
-    String updateNewBeeMallCartItem(LeavesMallShoppingCartItem leavesMallShoppingCartItem);
+    String updateLeavesMallCartItem(LeavesMallShoppingCartItem leavesMallShoppingCartItem);
 
     /**
      * Get item details
      *
-     * @param newBeeMallShoppingCartItemId
+     * @param leavesMallShoppingCartItemId
      * @return
      */
-    LeavesMallShoppingCartItem getNewBeeMallCartItemById(Long newBeeMallShoppingCartItemId);
+    LeavesMallShoppingCartItem getLeavesMallCartItemById(Long leavesMallShoppingCartItemId);
 
     /**
      * Delete the items in the shopping cart
      *
-     * @param newBeeMallShoppingCartItemId
+     * @param leavesMallShoppingCartItemId
      * @return
      */
-    Boolean deleteById(Long newBeeMallShoppingCartItemId);
+    Boolean deleteById(Long leavesMallShoppingCartItemId);
 
     /**
      * Get the list data in my shopping cart
      *
-     * @param newBeeMallUserId
+     * @param leavesMallUserId
      * @return
      */
-    List<LeavesMallShoppingCartItemVO> getMyShoppingCartItems(Long newBeeMallUserId);
+    List<LeavesMallShoppingCartItemVO> getMyShoppingCartItems(Long leavesMallUserId);
 }

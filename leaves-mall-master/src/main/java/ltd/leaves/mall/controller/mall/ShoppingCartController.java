@@ -57,7 +57,7 @@ public class ShoppingCartController {
         LeavesMallUserVO user = (LeavesMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
         leavesMallShoppingCartItem.setUserId(user.getUserId());
         //todo determine the number
-        String saveResult = leavesMallShoppingCartService.saveNewBeeMallCartItem(leavesMallShoppingCartItem);
+        String saveResult = leavesMallShoppingCartService.saveLeavesMallCartItem(leavesMallShoppingCartItem);
         //Add a success
         if (ServiceResultEnum.SUCCESS.getResult().equals(saveResult)) {
             return ResultGenerator.genSuccessResult();
@@ -73,7 +73,7 @@ public class ShoppingCartController {
         LeavesMallUserVO user = (LeavesMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
         leavesMallShoppingCartItem.setUserId(user.getUserId());
         //todo determine the number
-        String updateResult = leavesMallShoppingCartService.updateNewBeeMallCartItem(leavesMallShoppingCartItem);
+        String updateResult = leavesMallShoppingCartService.updateLeavesMallCartItem(leavesMallShoppingCartItem);
         //Modify the success
         if (ServiceResultEnum.SUCCESS.getResult().equals(updateResult)) {
             return ResultGenerator.genSuccessResult();

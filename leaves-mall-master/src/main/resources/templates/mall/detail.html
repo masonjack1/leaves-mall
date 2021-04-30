@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="mall/header::head-fragment('Leaves mall-商品详情','detail')">
+<head th:replace="mall/header::head-fragment('Leaves mall-Product details','detail')">
 </head>
 <body>
 <header th:replace="mall/header::header-fragment"></header>
@@ -11,7 +11,7 @@
 
     <div class="dc">
         <div class="content w">
-            <div class="title fl">商品详情</div>
+            <div class="title fl">Product details</div>
             <div class="clear"></div>
         </div>
     </div>
@@ -26,33 +26,33 @@
             <div class="h3 ml20 mt20" th:text="${goodsDetail.goodsName}">NewBeeMall</div>
             <div class="sub_title mr40 ml20 mt10" th:text="${goodsDetail.goodsIntro}">NewBeeMall</div>
             <div class="item_price mr40 ml20 mt10">
-                <th:block th:text="${goodsDetail.sellingPrice}+'.00 元'"></th:block>
+                <th:block th:text="${goodsDetail.sellingPrice}+'.00 yuan'"></th:block>
                 <del>
-                    <th:block th:text="${goodsDetail.originalPrice}+'.00 元'"></th:block>
+                    <th:block th:text="${goodsDetail.originalPrice}+'.00 yuan'"></th:block>
                 </del>
             </div>
 
             <div class="order">
-                <input class="car" type="button" th:onclick="'saveAndGoCart('+${goodsDetail.goodsId}+')'" value="立即选购"/>
-                <input class="car" type="button" th:onclick="'saveToCart('+${goodsDetail.goodsId}+')'" value="加入购物车"/>
+                <input class="car" type="button" th:onclick="'saveAndGoCart('+${goodsDetail.goodsId}+')'" value="Shop now"/>
+                <input class="car" type="button" th:onclick="'saveToCart('+${goodsDetail.goodsId}+')'" value="add to cart"/>
             </div>
             <div class="tb-extra ml20" id="J_tbExtra">
                 <dl>
-                    <dt>承诺</dt>
-                    <dd><a class="J_Cont" title="满足7天无理由退换货申请的前提下，包邮商品需要买家承担退货邮费，非包邮商品需要买家承担发货和退货邮费。" href="#"
-                           target="_blank"><img th:src="@{/mall/image/7d.jpg}">7天无理由</a></dd>
+                    <dt>promise</dt>
+                    <dd><a class="J_Cont" title="Under the premise of meeting the 7-day no reason return and exchange application, the buyer should bear the return postage for the parcel goods, and the buyer should bear the delivery and return postage for the non parcel goods." href="#"
+                           target="_blank"><img th:src="@{/mall/image/7d.jpg}">7 days without reason</a></dd>
                 </dl>
                 <dl>
                     <dt>支付</dt>
                     <dd><a href="##" target="_blank"><img th:src="@{/mall/image/hua.png}">蚂蚁花呗</a><a href="##"
                                                                                                      target="_blank"><img
-                            th:src="@{/mall/image/card.png}">信用卡支付</a><a href="##" target="_blank"><img
-                            th:src="@{/mall/image/ji.png}">集分宝</a></dd>
+                            th:src="@{/mall/image/card.png}">Credit Cards Accepted</a><a href="##" target="_blank"><img
+<!--                            th:src="@{/mall/image/ji.png}">集分宝</a></dd>-->
                 </dl>
-                <dl>
-                    <dt>支持</dt>
-                    <dd>折旧变现，买新更省钱。<a style="float:none;text-decoration: underline;" href="##">详情</a></dd>
-                </dl>
+<!--                <dl>-->
+<!--                    <dt>支持</dt>-->
+<!--                    <dd>折旧变现，买新更省钱。<a style="float:none;text-decoration: underline;" href="##">详情</a></dd>-->
+<!--                </dl>-->
 
             </div>
         </div>
@@ -71,7 +71,7 @@
 <script th:src="@{/mall/js/search.js}" type="text/javascript"></script>
 <script type="text/javascript">
     /**
-     * 添加到购物车
+     * Add to cart
      */
     function saveToCart(id) {
         var goodsCount = 1;
@@ -87,8 +87,8 @@
             success: function (result) {
                 if (result.resultCode == 200) {
                     swal({
-                        title: "添加成功",
-                        text: "确认框",
+                        title: "Added successfully",
+                        text: "Confirmation box",
                         icon: "success",
                         buttons: true,
                         dangerMode: true,
@@ -103,7 +103,7 @@
                 }
             },
             error: function () {
-                swal("操作失败", {
+                swal("operation failed", {
                     icon: "error",
                 });
             }
@@ -111,7 +111,7 @@
     }
 
     /**
-     * 添加到购物车并跳转至购物车页面
+     * Add to cart and jump to cart page
      */
     function saveAndGoCart(id) {
         var goodsCount = 1;
@@ -127,11 +127,11 @@
             success: function (result) {
                 if (result.resultCode == 200) {
                     swal({
-                        title: "已将商品加入购物车",
+                        title: "Item added to cart",
                         icon: "success",
                         buttons: {
-                            cancel: "留在当前页",
-                            confirm: "去购物车结算"
+                            cancel: "Stay on current page",
+                            confirm: "Go to the shopping cart to settle accounts"
                         },
                         dangerMode: false,
                     }).then((flag) => {
@@ -147,7 +147,7 @@
                 }
             },
             error: function () {
-                swal("操作失败", {
+                swal("operation failed", {
                     icon: "error",
                 });
             }

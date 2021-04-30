@@ -14,7 +14,7 @@
     <meta http-equiv="Cache" content="no-cache">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>newbee-mall 支付</title>
+    <title>leaves-mall pay</title>
     <link th:href="@{/mall/styles/pay.css}" rel="stylesheet" media="screen">
     <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.11.1/jquery.min.js"></script>
 </head>
@@ -37,7 +37,7 @@
                 <div style="position: relative;display: inline-block;">
                     <img width="300" height="300"
                          th:src="@{/mall/image/pay/alipay_qrcode.png}"
-                         title="请尽快支付~"
+                         title="Please pay as soon as possible~"
                          style="display: block;">
                 </div>
             </div>
@@ -45,10 +45,10 @@
 
         <div class="time-item" style="padding-top: 10px">
             <div class="time-item" id="msg">
-                <h1>支付完成后，将跳转至订单详情</h1>
+                <h1>After the payment is completed, it will jump to the order details</h1>
             </div>
             <div class="time-item">
-                <h1>订单:
+                <h1>order:
                     <th:block th:text="${orderNo}"></th:block>
                 </h1>
             </div>
@@ -58,11 +58,11 @@
         <div class="tip">
             <div class="ico-scan-ali"></div>
             <div class="tip-text">
-                <p id="showtext">打开支付宝 [扫一扫]</p>
+                <p id="showtext">Open Alipay [sweep]</p>
             </div>
             <div class="tip-text">
                 <a onclick="payOrderSuccess()"
-                   class="btn btn-small btn-success" title="支付成功">支付成功</a>
+                   class="btn btn-small btn-success" title="Pay successful">Pay successful</a>
             </div>
         </div>
 
@@ -87,7 +87,7 @@
                 }
             },
             error: function () {
-                alert("操作失败");
+                alert("operation failed");
             }
         });
     }

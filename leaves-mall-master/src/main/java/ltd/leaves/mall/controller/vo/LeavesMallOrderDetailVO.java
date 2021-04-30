@@ -31,7 +31,7 @@ public class LeavesMallOrderDetailVO implements Serializable {
 
     private Date createTime;
 
-    private List<LeavesMallOrderItemVO> leavesMallOrderItemVOS;
+    public List<LeavesMallOrderItemVO> leavesMallOrderItemVOS;
 
     public String getOrderNo() {
         return orderNo;

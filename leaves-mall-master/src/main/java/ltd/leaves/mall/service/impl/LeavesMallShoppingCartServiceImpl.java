@@ -29,13 +29,13 @@ public class LeavesMallShoppingCartServiceImpl implements LeavesMallShoppingCart
     //todo Modify the number of items purchased in the session
 
     @Override
-    public String saveNewBeeMallCartItem(LeavesMallShoppingCartItem leavesMallShoppingCartItem) {
+    public String saveLeavesMallCartItem(LeavesMallShoppingCartItem leavesMallShoppingCartItem) {
         LeavesMallShoppingCartItem temp = leavesMallShoppingCartItemMapper.selectByUserIdAndGoodsId(leavesMallShoppingCartItem.getUserId(), leavesMallShoppingCartItem.getGoodsId());
         if (temp != null) {
             //If it already exists, modify the record
             //todo count = tempCount + 1
             temp.setGoodsCount(leavesMallShoppingCartItem.getGoodsCount());
-            return updateNewBeeMallCartItem(temp);
+            return updateLeavesMallCartItem(temp);
         }
         LeavesMallGoods leavesMallGoods = leavesMallGoodsMapper.selectByPrimaryKey(leavesMallShoppingCartItem.getGoodsId());
         //Goods is empty
@@ -59,7 +59,7 @@ public class LeavesMallShoppingCartServiceImpl implements LeavesMallShoppingCart
     }
 
     @Override
-    public String updateNewBeeMallCartItem(LeavesMallShoppingCartItem leavesMallShoppingCartItem) {
+    public String updateLeavesMallCartItem(LeavesMallShoppingCartItem leavesMallShoppingCartItem) {
         LeavesMallShoppingCartItem leavesMallShoppingCartItemUpdate = leavesMallShoppingCartItemMapper.selectByPrimaryKey(leavesMallShoppingCartItem.getCartItemId());
         if (leavesMallShoppingCartItemUpdate == null) {
             return ServiceResultEnum.DATA_NOT_EXIST.getResult();
@@ -79,34 +79,36 @@ public class LeavesMallShoppingCartServiceImpl implements LeavesMallShoppingCart
         return ServiceResultEnum.DB_ERROR.getResult();
     }
 
+
+
     @Override
-    public LeavesMallShoppingCartItem getNewBeeMallCartItemById(Long newBeeMallShoppingCartItemId) {
-        return leavesMallShoppingCartItemMapper.selectByPrimaryKey(newBeeMallShoppingCartItemId);
+    public LeavesMallShoppingCartItem getLeavesMallCartItemById(Long leavesMallShoppingCartItemId) {
+        return leavesMallShoppingCartItemMapper.selectByPrimaryKey(leavesMallShoppingCartItemId);
     }
 
     @Override
-    public Boolean deleteById(Long newBeeMallShoppingCartItemId) {
+    public Boolean deleteById(Long leavesMallShoppingCartItemId) {
         //todo Can not delete different userId
-        return leavesMallShoppingCartItemMapper.deleteByPrimaryKey(newBeeMallShoppingCartItemId) > 0;
+        return leavesMallShoppingCartItemMapper.deleteByPrimaryKey(leavesMallShoppingCartItemId) > 0;
     }
 
     @Override
-    public List<LeavesMallShoppingCartItemVO> getMyShoppingCartItems(Long newBeeMallUserId) {
+    public List<LeavesMallShoppingCartItemVO> getMyShoppingCartItems(Long leavesMallUserId) {
         List<LeavesMallShoppingCartItemVO> leavesMallShoppingCartItemVOS = new ArrayList<>();
-        List<LeavesMallShoppingCartItem> leavesMallShoppingCartItems = leavesMallShoppingCartItemMapper.selectByUserId(newBeeMallUserId, Constants.SHOPPING_CART_ITEM_TOTAL_NUMBER);
+        List<LeavesMallShoppingCartItem> leavesMallShoppingCartItems = leavesMallShoppingCartItemMapper.selectByUserId(leavesMallUserId, Constants.SHOPPING_CART_ITEM_TOTAL_NUMBER);
         if (!CollectionUtils.isEmpty(leavesMallShoppingCartItems)) {
             //Inquire commodity information and do data conversion
-            List<Long> newBeeMallGoodsIds = leavesMallShoppingCartItems.stream().map(LeavesMallShoppingCartItem::getGoodsId).collect(Collectors.toList());
-            List<LeavesMallGoods> leavesMallGoods = leavesMallGoodsMapper.selectByPrimaryKeys(newBeeMallGoodsIds);
-            Map<Long, LeavesMallGoods> newBeeMallGoodsMap = new HashMap<>();
+            List<Long> leavesMallGoodsIds = leavesMallShoppingCartItems.stream().map(LeavesMallShoppingCartItem::getGoodsId).collect(Collectors.toList());
+            List<LeavesMallGoods> leavesMallGoods = leavesMallGoodsMapper.selectByPrimaryKeys(leavesMallGoodsIds);
+            Map<Long, LeavesMallGoods> leavesMallGoodsMap = new HashMap<>();
             if (!CollectionUtils.isEmpty(leavesMallGoods)) {
-                newBeeMallGoodsMap = leavesMallGoods.stream().collect(Collectors.toMap(LeavesMallGoods::getGoodsId, Function.identity(), (entity1, entity2) -> entity1));
+                leavesMallGoodsMap = leavesMallGoods.stream().collect(Collectors.toMap(LeavesMallGoods::getGoodsId, Function.identity(), (entity1, entity2) -> entity1));
             }
             for (LeavesMallShoppingCartItem leavesMallShoppingCartItem : leavesMallShoppingCartItems) {
                 LeavesMallShoppingCartItemVO leavesMallShoppingCartItemVO = new LeavesMallShoppingCartItemVO();
                 BeanUtil.copyProperties(leavesMallShoppingCartItem, leavesMallShoppingCartItemVO);
-                if (newBeeMallGoodsMap.containsKey(leavesMallShoppingCartItem.getGoodsId())) {
-                    LeavesMallGoods leavesMallGoodsTemp = newBeeMallGoodsMap.get(leavesMallShoppingCartItem.getGoodsId());
+                if (leavesMallGoodsMap.containsKey(leavesMallShoppingCartItem.getGoodsId())) {
+                    LeavesMallGoods leavesMallGoodsTemp = leavesMallGoodsMap.get(leavesMallShoppingCartItem.getGoodsId());
                     leavesMallShoppingCartItemVO.setGoodsCoverImg(leavesMallGoodsTemp.getGoodsCoverImg());
                     String goodsName = leavesMallGoodsTemp.getGoodsName();
                     // An issue with a string that is too long resulting in text overrun

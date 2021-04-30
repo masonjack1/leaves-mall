@@ -25,7 +25,7 @@ public class LeavesMallOrderListVO implements Serializable {
 
     private Date createTime;
 
-    private List<LeavesMallOrderItemVO> leavesMallOrderItemVOS;
+    public List<LeavesMallOrderItemVO> leavesMallOrderItemVOS;
 
     public Long getOrderId() {
         return orderId;

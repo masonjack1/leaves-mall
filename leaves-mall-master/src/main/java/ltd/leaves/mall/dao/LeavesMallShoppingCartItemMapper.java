@@ -17,11 +17,11 @@ public interface LeavesMallShoppingCartItemMapper {
 
     LeavesMallShoppingCartItem selectByPrimaryKey(Long cartItemId);
 
-    LeavesMallShoppingCartItem selectByUserIdAndGoodsId(@Param("leavesMallUserId") Long newBeeMallUserId, @Param("goodsId") Long goodsId);
+    LeavesMallShoppingCartItem selectByUserIdAndGoodsId(@Param("leavesMallUserId") Long leavesMallUserId, @Param("goodsId") Long goodsId);
 
-    List<LeavesMallShoppingCartItem> selectByUserId(@Param("leavesMallUserId") Long newBeeMallUserId, @Param("number") int number);
+    List<LeavesMallShoppingCartItem> selectByUserId(@Param("leavesMallUserId") Long leavesMallUserId, @Param("number") int number);
 
-    int selectCountByUserId(Long newBeeMallUserId);
+    int selectCountByUserId(Long leavesMallUserId);
 
     int updateByPrimaryKeySelective(LeavesMallShoppingCartItem record);
 
